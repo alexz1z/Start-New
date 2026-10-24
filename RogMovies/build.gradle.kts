@@ -4,8 +4,6 @@ plugins {
 }
 
 cloudstream {
-    setRepoUrl("https://github.com/alexz1z/Start-New")
-    name = "RogMovies"
     description = "RogMovies Bollywood & Dual Audio Stream & Download"
     authors = listOf("alexz1z")
     version = 1
