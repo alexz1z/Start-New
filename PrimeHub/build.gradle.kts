@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.alexz1z.primehub"
+    namespace = "com.alexz1z.${project.name.lowercase()}"
     compileSdk = 34
     defaultConfig {
         minSdk = 21
@@ -14,12 +14,6 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
-}
-
-cloudstream {
-    description = "PrimeHub Movies & Series Stream & Download"
-    authors = listOf("alexz1z")
-    version = 1
 }
 
 dependencies {
