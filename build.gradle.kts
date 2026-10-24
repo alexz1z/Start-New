@@ -11,7 +11,21 @@ buildscript {
     }
 }
 
+apply(plugin = "com.android.application")
 apply(plugin = "com.lagradost.cloudstream3.gradle")
+
+android {
+    namespace = "com.alexz1z.root"
+    compileSdk = 34
+    defaultConfig {
+        minSdk = 21
+        targetSdk = 34
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+}
 
 allprojects {
     repositories {
