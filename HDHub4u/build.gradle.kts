@@ -4,8 +4,6 @@ plugins {
 }
 
 cloudstream {
-    setRepoUrl("https://github.com/alexz1z/Start-New")
-    name = "HDHub4u"
     description = "HDHub4u Movies & Web Series Stream & Download"
     authors = listOf("alexz1z")
     version = 1
