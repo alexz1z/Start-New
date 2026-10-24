@@ -20,21 +20,3 @@ allprojects {
         maven("https://jitpack.io")
     }
 }
-
-subprojects {
-    apply(plugin = "com.android.library")
-    apply(plugin = "kotlin-android")
-    apply(plugin = "com.lagradost.cloudstream3.gradle")
-
-    afterEvaluate {
-        extensions.findByName("android")?.let { android ->
-            (android as com.android.build.gradle.BaseExtension).apply {
-                compileSdkVersion(34)
-                defaultConfig {
-                    minSdk = 21
-                    targetSdk = 34
-                }
-            }
-        }
-    }
-}
