@@ -27,7 +27,7 @@ subprojects {
     apply(plugin = "com.lagradost.cloudstream3.gradle")
 
     extensions.configure<BaseExtension>("android") {
-        namespace = "com.alexz1z"
+        namespace = "com.alexz1z.${project.name.lowercase()}"
         compileSdkVersion(34)
 
         defaultConfig {
@@ -54,11 +54,7 @@ subprojects {
 
     dependencies {
         val implementation by configurations
-        val csConfig = configurations.findByName("cloudstream")
-            ?: configurations.findByName("apk")
-            ?: configurations.getByName("compileOnly")
-
-        csConfig("com.lagradost:cloudstream3:pre-release")
+        implementation("com.github.recloudstream.cloudstream:library:-SNAPSHOT")
         implementation(kotlin("stdlib"))
         implementation("com.github.Blatzar:NiceHttp:0.4.11")
         implementation("org.jsoup:jsoup:1.17.2")
