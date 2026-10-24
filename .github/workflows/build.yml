@@ -33,7 +33,9 @@ jobs:
           gradle-version: '8.5'
 
       - name: Build Plugins and Repository
-        run: gradle makePlugins makePluginsJson
+        run: |
+          gradle make makePluginsJson
+          cp repo.json build/ 2>/dev/null || true
 
       - name: Deploy to Build Branch
         uses: JamesIves/github-pages-deploy-action@v4
