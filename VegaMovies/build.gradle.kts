@@ -4,9 +4,7 @@ plugins {
 }
 
 cloudstream {
-    setRepoUrl("https://github.com/alexz1z/Start-New")
-    name = "VegaMovies"
-    description = "VegaMovies Multi Audio Stream & Download"
+    description = "VegaMovies Bollywood & Hollywood Movies & Series"
     authors = listOf("alexz1z")
     version = 1
 }
