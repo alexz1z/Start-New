@@ -4,8 +4,6 @@ plugins {
 }
 
 cloudstream {
-    setRepoUrl("https://github.com/alexz1z/Start-New")
-    name = "PrimeHub"
     description = "PrimeHub Movies & Series Stream & Download"
     authors = listOf("alexz1z")
     version = 1
