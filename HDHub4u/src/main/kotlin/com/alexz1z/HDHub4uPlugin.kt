@@ -5,7 +5,7 @@ import com.lagradost.cloudstream3.plugins.Plugin
 import android.content.Context
 
 @CloudstreamPlugin
-class HDHub4uPlugin: Plugin() {
+class HDHub4uPlugin : Plugin() {
     override fun load(context: Context) {
         registerMainAPI(HDHub4u())
     }
