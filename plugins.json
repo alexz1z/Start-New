@@ -1,0 +1,62 @@
+[
+    {
+        "fileHash": "sha256-a41846cce8cc5d99441aa1d4f8fdde671a936d20226af45eaa12b6330b445326",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/alexz1z/Start-New",
+        "fileSize": 9627,
+        "status": 3,
+        "authors": [
+            "alexz1z"
+        ],
+        "version": 1,
+        "internalName": "HDHub4u",
+        "description": "HDHub4u Movies & Series",
+        "url": "https://raw.githubusercontent.com/alexz1z/Start-New/builds/HDHub4u.cs3",
+        "name": "HDHub4u"
+    },
+    {
+        "fileHash": "sha256-e0f594409197beb7ec40db43b79341774282dd7266ae574b29b9722cac065024",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/alexz1z/Start-New",
+        "fileSize": 9637,
+        "status": 3,
+        "authors": [
+            "alexz1z"
+        ],
+        "version": 1,
+        "internalName": "PrimeHub",
+        "description": "PrimeHub Movies & Series",
+        "url": "https://raw.githubusercontent.com/alexz1z/Start-New/builds/PrimeHub.cs3",
+        "name": "PrimeHub"
+    },
+    {
+        "fileHash": "sha256-0974dff11f151c77a030177150a25e0dd3f5ef28ee7493cb5ac97096aa390884",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/alexz1z/Start-New",
+        "fileSize": 9617,
+        "status": 3,
+        "authors": [
+            "alexz1z"
+        ],
+        "version": 1,
+        "internalName": "RogMovies",
+        "description": "RogMovies Movies & Series",
+        "url": "https://raw.githubusercontent.com/alexz1z/Start-New/builds/RogMovies.cs3",
+        "name": "RogMovies"
+    },
+    {
+        "fileHash": "sha256-7699ece939d6e5d915f0b181a5b2d0bf78e638c581c27920a1d4d210b4147209",
+        "apiVersion": 1,
+        "repositoryUrl": "https://github.com/alexz1z/Start-New",
+        "fileSize": 9503,
+        "status": 3,
+        "authors": [
+            "alexz1z"
+        ],
+        "version": 1,
+        "internalName": "VegaMovies",
+        "description": "VegaMovies Movies & Series",
+        "url": "https://raw.githubusercontent.com/alexz1z/Start-New/builds/VegaMovies.cs3",
+        "name": "VegaMovies"
+    }
+]
