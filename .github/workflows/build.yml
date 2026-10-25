@@ -35,7 +35,10 @@ jobs:
       - name: Build Plugins and Repository
         run: |
           gradle make makePluginsJson
+          mkdir -p build
+          cp */build/*.cs3 build/
           cp repo.json build/ 2>/dev/null || true
+          ls -la build
 
       - name: Deploy to Build Branch
         uses: JamesIves/github-pages-deploy-action@v4
