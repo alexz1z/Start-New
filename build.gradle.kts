@@ -1,13 +1,19 @@
+import com.android.build.gradle.BaseExtension
+import com.lagradost.cloudstream3.gradle.CloudstreamExtension
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+
 buildscript {
     repositories {
         google()
         mavenCentral()
         maven("https://jitpack.io")
     }
+
     dependencies {
         classpath("com.android.tools.build:gradle:8.7.3")
         classpath("com.github.recloudstream:gradle:-SNAPSHOT")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.4.0")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0")
     }
 }
 
@@ -19,10 +25,63 @@ allprojects {
     }
 }
 
+fun Project.cloudstream(configuration: CloudstreamExtension.() -> Unit) =
+    extensions.getByName<CloudstreamExtension>("cloudstream").configuration()
+
+fun Project.android(configuration: BaseExtension.() -> Unit) =
+    extensions.getByName<BaseExtension>("android").configuration()
+
 subprojects {
-    configurations.all {
-        resolutionStrategy {
-            force("com.github.recloudstream.cloudstream:library:master-SNAPSHOT")
+    apply(plugin = "com.android.library")
+    apply(plugin = "kotlin-android")
+    apply(plugin = "com.lagradost.cloudstream3.gradle")
+
+    cloudstream {
+        setRepo(System.getenv("GITHUB_REPOSITORY") ?: "https://github.com/alexz1z/Start-New")
+    }
+
+    android {
+        compileSdkVersion(35)
+
+        defaultConfig {
+            minSdk = 21
+            targetSdk = 35
+        }
+
+        compileOptions {
+            sourceCompatibility = JavaVersion.VERSION_17
+            targetCompatibility = JavaVersion.VERSION_17
         }
     }
+
+    tasks.withType<KotlinCompile> {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_17)
+            freeCompilerArgs.addAll(
+                "-Xno-call-assertions",
+                "-Xno-param-assertions",
+                "-Xno-receiver-assertions"
+            )
+        }
+    }
+
+    dependencies {
+        val cloudstream by configurations
+        val implementation by configurations
+
+        // Stubs for all Cloudstream classes (yahi missing tha)
+        cloudstream("com.lagradost:cloudstream3:pre-release")
+
+        implementation(kotlin("stdlib"))
+        implementation("com.github.Blatzar:NiceHttp:0.4.11")
+        implementation("org.jsoup:jsoup:1.17.2")
+        implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.16.0")
+        implementation("com.fasterxml.jackson.core:jackson-databind:2.16.0")
+        implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3")
+        implementation("org.jspecify:jspecify:1.0.0")
+    }
+}
+
+tasks.register<Delete>("clean") {
+    delete(rootProject.layout.buildDirectory)
 }
