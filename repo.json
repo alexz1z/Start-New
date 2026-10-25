@@ -1,0 +1,8 @@
+{
+  "name": "Alex Repo",
+  "description": "Cloudstream Plugins",
+  "manifestVersion": 1,
+  "pluginLists": [
+    "https://raw.githubusercontent.com/alexz1z/Start-New/build/plugins.json"
+  ]
+}
