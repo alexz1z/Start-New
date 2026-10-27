@@ -22,21 +22,29 @@ class VegaMovies : MainAPI() {
     override suspend fun getMainPage(page: Int, request: MainPageRequest): HomePageResponse {
         val url = if (page <= 1) mainUrl else "${request.data}$page/"
         val document = app.get(url).document
-        val home = document.select("article.blog-card, article.post-item, div.post-item, article").mapNotNull {
+        val home = document.select("div.movies-grid > a, #moviesGridMain > a, a:has(.poster-card), article").mapNotNull {
             it.toSearchResult()
         }
         return newHomePageResponse(request.name, home)
     }
 
     private fun Element.toSearchResult(): SearchResponse? {
-        val title = this.selectFirst("h2, h3, .entry-title")?.text()?.trim() ?: return null
-        val href = this.selectFirst("a")?.attr("href") ?: return null
-        val posterUrl = this.selectFirst("img")?.let { img ->
-            val dataSrc = img.attr("data-src")
-            if (dataSrc.isNotEmpty()) dataSrc else img.attr("src")
-        }
+        val href = if (this.tagName() == "a") {
+            this.attr("href")
+        } else {
+            this.selectFirst("a")?.attr("href") ?: this.parents().firstOrNull { it.tagName() == "a" }?.attr("href")
+        } ?: return null
 
-        return newMovieSearchResponse(title, href, TvType.Movie) {
+        val fullHref = if (href.startsWith("http")) href else if (href.startsWith("/")) "$mainUrl$href" else "$mainUrl/$href"
+
+        val img = this.selectFirst("img")
+        val posterUrl = img?.attr("src")?.takeIf { it.isNotEmpty() } ?: img?.attr("data-src")?.takeIf { it.isNotEmpty() }
+
+        val title = this.selectFirst(".poster-info, h2, h3, .entry-title")?.text()?.trim()?.takeIf { it.isNotEmpty() }
+            ?: img?.attr("alt")?.trim()?.takeIf { it.isNotEmpty() }
+            ?: return null
+
+        return newMovieSearchResponse(title, fullHref, TvType.Movie) {
             this.posterUrl = posterUrl
         }
     }
@@ -44,19 +52,19 @@ class VegaMovies : MainAPI() {
     override suspend fun search(query: String): List<SearchResponse> {
         val searchUrl = "$mainUrl/?s=$query"
         val document = app.get(searchUrl).document
-        return document.select("article.blog-card, article.post-item, div.post-item, article").mapNotNull {
+        return document.select("div.movies-grid > a, #moviesGridMain > a, a:has(.poster-card), article").mapNotNull {
             it.toSearchResult()
         }
     }
 
     override suspend fun load(url: String): LoadResponse {
         val document = app.get(url).document
-        val title = document.selectFirst("h1.entry-title, h1")?.text()?.trim() ?: "VegaMovies"
-        val poster = document.selectFirst("div.entry-content img, article img")?.let { img ->
+        val title = document.selectFirst("h1.entry-title, h1, .section-title")?.text()?.trim() ?: "VegaMovies"
+        val poster = document.selectFirst("div.entry-content img, article img, .poster-image img")?.let { img ->
             val dataSrc = img.attr("data-src")
             if (dataSrc.isNotEmpty()) dataSrc else img.attr("src")
         }
-        val description = document.selectFirst("div.entry-content p")?.text()?.trim()
+        val description = document.selectFirst("div.entry-content p, .entry-content")?.text()?.trim()
 
         return newMovieLoadResponse(title, url, TvType.Movie, url) {
             this.posterUrl = poster
