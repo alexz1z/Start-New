@@ -45,10 +45,10 @@
         "name": "RogMovies"
     },
     {
-        "fileHash": "sha256-7699ece939d6e5d915f0b181a5b2d0bf78e638c581c27920a1d4d210b4147209",
+        "fileHash": "sha256-180068299dd5c50b5967fefdb41d7c9e38159e3b9f691b7011757fd12fc6a960",
         "apiVersion": 1,
         "repositoryUrl": "https://github.com/alexz1z/Start-New",
-        "fileSize": 9503,
+        "fileSize": 9974,
         "status": 3,
         "authors": [
             "alexz1z"
